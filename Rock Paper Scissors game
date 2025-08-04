@@ -1,0 +1,53 @@
+import random
+
+def play_game():
+    """
+    Plays a single round of Rock, Paper, Scissors.
+    """
+    choices = ["rock", "paper", "scissors"]
+    
+    # Get user's choice
+    user_choice = input("Enter your choice (rock, paper, or scissors): ").lower()
+    while user_choice not in choices:
+        print("Invalid choice. Please enter 'rock', 'paper', or 'scissors'.")
+        user_choice = input("Enter your choice (rock, paper, or scissors): ").lower()
+        
+    # Generate computer's choice
+    computer_choice = random.choice(choices)
+    
+    print(f"\nYou chose: {user_choice}")
+    print(f"Computer chose: {computer_choice}\n")
+    
+    # Determine the winner
+    if user_choice == computer_choice:
+        return "It's a tie!"
+    elif (user_choice == "rock" and computer_choice == "scissors") or \
+         (user_choice == "paper" and computer_choice == "rock") or \
+         (user_choice == "scissors" and computer_choice == "paper"):
+        return "You win!"
+    else:
+        return "Computer wins!"
+
+def main():
+    """
+    Main function to run the Rock, Paper, Scissors game with a scoreboard.
+    """
+    user_score = 0
+    computer_score = 0
+    
+    print("Welcome to Rock, Paper, Scissors!")
+    
+    while True:
+        result = play_game()
+        print(result)
+        
+        # Update score
+        if "win" in result and "You" in result:
+            user_score += 1
+        elif "Computer" in result:
+            computer_score += 1
+            
+        print(f"\n--- Current Score ---")
+        print(f"You: {user_score}")
+        print(f"Computer: {computer_score}")
+        print("---------------------\n")
